@@ -13,10 +13,10 @@ Date:		17/06/2020 08:22
 namespace MSD.Systems.Analytics
 {
 	[Serializable]
-	public class EventNameFormatter
+	public class EventContext
 	{
 		[SerializeField]
-		private List<EventNameSection> _sections = new List<EventNameSection>();
+		private List<EventContextComponent> _sections = new List<EventContextComponent>();
 
 		public bool IsValid => IsValidName && IsValidFormat;
 
@@ -38,25 +38,25 @@ namespace MSD.Systems.Analytics
 			return _sections.Where(section => section != null).Select(section => section.Value).ToArray();
 		}
 
-		private int CompareSections(EventNameSection lhs, EventNameSection rhs)
+		private int CompareSections(EventContextComponent lhs, EventContextComponent rhs)
 		{
 			return lhs == null ? -1 : rhs == null ? 1 : (int)lhs.Type - (int)rhs.Type;
 		}
 
-		private bool ValidSection(EventNameSection eventNameSection)
+		private bool ValidSection(EventContextComponent eventNameSection)
 		{
 			// since we ignore null sections
-			return eventNameSection == null ? true : eventNameSection.IsValid;
+			return eventNameSection == null || eventNameSection.IsValid;
 		}
 
-		private bool IsVerbSection(EventNameSection eventNameSection)
+		private bool IsVerbSection(EventContextComponent eventNameSection)
 		{
-			return eventNameSection == null ? false : eventNameSection.Type == EventNameSection.SectionType.Verb;
+			return eventNameSection != null && eventNameSection.Type == EventContextComponentType.Verb;
 		}
 
-		private bool IsClassificationSection(EventNameSection eventNameSection)
+		private bool IsClassificationSection(EventContextComponent eventNameSection)
 		{
-			return eventNameSection == null ? false : eventNameSection.Type == EventNameSection.SectionType.Classification;
+			return eventNameSection != null && eventNameSection.Type == EventContextComponentType.Classification;
 		}
 	}
 }

@@ -39,7 +39,7 @@ namespace MSD.Systems.Analytics
 		{
 			List<ParameterPreset> nonEmpty = new List<ParameterPreset>(_presets);
 			nonEmpty.RemoveAll(elt => elt == null);
-			return nonEmpty.ToDictionary((p) => p.name, (p) => p.Type);
+			return nonEmpty.ToDictionary((p) => p.Name, (p) => p.Type);
 		}
 
 		public override string ToString()
@@ -60,7 +60,7 @@ namespace MSD.Systems.Analytics
 		private bool ValidParameterPreset(ParameterPreset parameterPreset)
 		{
 			// since we ignore null presets
-			return parameterPreset == null ? true : parameterPreset.IsValid;
+			return parameterPreset == null || parameterPreset.IsValid;
 		}
 	}
 }

@@ -58,6 +58,7 @@ namespace MSD.Systems.Analytics.Editor
 
 		private void DrawElementCallback(Rect rect, int index)
 		{
+			rect.y += EditorGUIUtility.standardVerticalSpacing;
 			ParameterEditor editor = new ParameterEditor(_keysProperty.GetArrayElementAtIndex(index), _valuesProperty.GetArrayElementAtIndex(index));
 			editor.Draw(rect);
 		}

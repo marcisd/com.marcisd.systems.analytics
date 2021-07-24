@@ -11,8 +11,8 @@ Date:		17/06/2020 15:01
 
 namespace MSD.Systems.Analytics.Editor 
 {
-	[CustomPropertyDrawer(typeof(EventNameFormatter))]
-	public class EventNameFormatterDrawer : PropertyDrawer
+	[CustomPropertyDrawer(typeof(EventContext))]
+	public class EventContextDrawer : PropertyDrawer
 	{
 		private SerializedProperty _sectionsProp;
 		private ReorderableList _reorderableList;
@@ -45,8 +45,8 @@ namespace MSD.Systems.Analytics.Editor
 					Event.current.Use();
 				} else if (Event.current.type == EventType.DragPerform) {
 					foreach (var objectReference in DragAndDrop.objectReferences) {
-						if (objectReference is EventNameSection eventNameSection) {
-							Add(eventNameSection);
+						if (objectReference is EventContextComponent eventContextComponent) {
+							Add(eventContextComponent);
 						}
 					}
 					Event.current.Use();
@@ -54,10 +54,10 @@ namespace MSD.Systems.Analytics.Editor
 			}
 		}
 
-		private void Add(EventNameSection eventNameSection)
+		private void Add(EventContextComponent eventContextComponent)
 		{
 			_sectionsProp.arraySize += 1;
-			_sectionsProp.GetArrayElementAtIndex(_sectionsProp.arraySize - 1).objectReferenceValue = eventNameSection;
+			_sectionsProp.GetArrayElementAtIndex(_sectionsProp.arraySize - 1).objectReferenceValue = eventContextComponent;
 		}
 
 		private void LazyInitReoderableList(SerializedProperty property, GUIContent label)
@@ -81,6 +81,7 @@ namespace MSD.Systems.Analytics.Editor
 		private void DrawElementCallback(Rect rect, int index)
 		{
 			Rect objRect = new Rect(rect) {
+				y = rect.y + EditorGUIUtility.standardVerticalSpacing,
 				height = EditorGUIUtility.singleLineHeight,
 				width = rect.width * 0.7f,
 			};
@@ -100,7 +101,7 @@ namespace MSD.Systems.Analytics.Editor
 			if (elementProp != null && elementProp.objectReferenceValue != null) {
 				SerializedObject elementObj = new SerializedObject(elementProp.objectReferenceValue);
 				SerializedProperty typeProp = elementObj.FindProperty("_type");
-				using (new EditorGUILabelWidthScope(50f))
+				using (new EditorGUILabelWidthScope(35f))
 				using (new EditorGUI.DisabledScope(true)) {
 					EditorGUI.PropertyField(typeRect, typeProp);
 				}

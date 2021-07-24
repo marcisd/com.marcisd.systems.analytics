@@ -35,7 +35,7 @@ namespace MSD.Systems.Analytics
 		}
 
 		public ParameterType Type {
-			get { return _type; }
+			get => _type;
 			set {
 				if (_type != value) {
 					_type = value;
@@ -44,41 +44,21 @@ namespace MSD.Systems.Analytics
 			}
 		}
 
-		public object ObjectValue {
-			get {
-				return _type switch {
-					ParameterType.Bool => _boolReference.Value,
-					ParameterType.Float => _floatReference.Value,
-					ParameterType.Int => _intReference.Value,
-					ParameterType.String => _stringReference.Value,
-					_ => null,
-				};
-			}
-		}
+		public object ObjectValue => _type switch {
+			ParameterType.Bool => _boolReference.Value,
+			ParameterType.Float => _floatReference.Value,
+			ParameterType.Int => _intReference.Value,
+			ParameterType.String => _stringReference.Value,
+			_ => null,
+		};
 
-		public bool BoolValue {
-			get {
-				return _boolReference.Value;
-			}
-		}
+		public bool BoolValue => _boolReference.Value;
 
-		public float FloatValue {
-			get {
-				return _floatReference.Value;
-			}
-		}
+		public float FloatValue => _floatReference.Value;
 
-		public int IntValue {
-			get {
-				return _intReference.Value;
-			}
-		}
+		public int IntValue => _intReference.Value;
 
-		public string StringValue {
-			get {
-				return _stringReference.Value;
-			}
-		}
+		public string StringValue => _stringReference.Value;
 
 		private void ResetReferences()
 		{
@@ -88,15 +68,12 @@ namespace MSD.Systems.Analytics
 			_stringReference = new StringReference();
 		}
 
-		public override string ToString()
-		{
-			return _type switch {
-				ParameterType.Bool => _boolReference.Value.ToString(),
-				ParameterType.Float => _floatReference.Value.ToString(),
-				ParameterType.Int => _intReference.Value.ToString(),
-				ParameterType.String => _stringReference.Value,
-				_ => string.Empty,
-			};
-		}
+		public override string ToString() => _type switch {
+			ParameterType.Bool => _boolReference.Value.ToString(),
+			ParameterType.Float => _floatReference.Value.ToString(),
+			ParameterType.Int => _intReference.Value.ToString(),
+			ParameterType.String => _stringReference.Value,
+			_ => string.Empty,
+		};
 	}
 }

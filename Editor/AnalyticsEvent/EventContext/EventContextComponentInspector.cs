@@ -9,11 +9,11 @@ Date:		18/06/2020 14:39
 
 namespace MSD.Systems.Analytics.Editor
 {
-	[CustomEditor(typeof(EventNameSection))]
+	[CustomEditor(typeof(EventContextComponent))]
 	[CanEditMultipleObjects]
-	public class EventNameSectionInspector : UnityEditor.Editor 
+	public class EventContextComponentInspector : UnityEditor.Editor 
 	{
-		private EventNameSection EventNameSection => target as EventNameSection;
+		private EventContextComponent Target => target as EventContextComponent;
 
 		public override void OnInspectorGUI() 
 		{
@@ -31,7 +31,7 @@ namespace MSD.Systems.Analytics.Editor
 
 		public void DrawValidation()
 		{
-			if (!EventNameSection.IsValid) {
+			if (!Target.IsValid) {
 				EditorGUILayout.HelpBox("Naming violation!", MessageType.Error);
 			}
 		}

@@ -18,7 +18,7 @@ namespace MSD.Systems.Analytics
 			{
 				NoServiceDestination,
 				InvalidEventName,
-				InvalidEventNameFormat,
+				InvalidEventContext,
 				InvalidParameterNameFormat,
 			}
 
@@ -31,7 +31,7 @@ namespace MSD.Systems.Analytics
 				return type switch {
 					ErrorType.NoServiceDestination => new NoServiceDestination(),
 					ErrorType.InvalidEventName => new InvalidEventName(),
-					ErrorType.InvalidEventNameFormat => new InvalidEventNameFormat(),
+					ErrorType.InvalidEventContext => new InvalidEventContext(),
 					ErrorType.InvalidParameterNameFormat => new InvalidParameterNameFormat(),
 					_ => null,
 				};
@@ -55,14 +55,14 @@ namespace MSD.Systems.Analytics
 		{
 			public override string Log => "Invalid event name.";
 
-			public override bool Test(AnalyticsEventFormat format) => !format._nameFormatter.IsValidName;
+			public override bool Test(AnalyticsEventFormat format) => !format._eventContext.IsValidName;
 		}
 
-		private class InvalidEventNameFormat : Validation
+		private class InvalidEventContext : Validation
 		{
-			public override string Log => "Event name format must have exactly one classification and exacly one verb.";
+			public override string Log => "Event context must have exactly one classification and exacly one verb.";
 
-			public override bool Test(AnalyticsEventFormat format) => !format._nameFormatter.IsValidFormat;
+			public override bool Test(AnalyticsEventFormat format) => !format._eventContext.IsValidFormat;
 		}
 
 		private class InvalidParameterNameFormat : Validation

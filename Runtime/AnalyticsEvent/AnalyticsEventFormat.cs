@@ -20,7 +20,7 @@ namespace MSD.Systems.Analytics
 
 		[Space]
 		[SerializeField]
-		private EventNameFormatter _nameFormatter;
+		private EventContext _eventContext;
 
 		[Space]
 		[SerializeField]
@@ -31,8 +31,11 @@ namespace MSD.Systems.Analytics
 		private List<string> _validationLogs = new List<string>();
 
 		public AnalyticsService ServiceDestination => _serviceDestination;
-		public string EventName => _serviceDestination.EventNameFormatSpecifier.FormatEventName(_nameFormatter.NameSections());
+
+		public string EventName => _serviceDestination.EventNameFormatSpecifier.FormatEventName(_eventContext.NameSections());
+
 		public IDictionary<string, ParameterType> ParameterFormat => _parameterFormatter.GetParameterFormat();
+
 		public int ParameterCount => _parameterFormatter.Count;
 
 		[field: NonSerialized]
@@ -40,7 +43,7 @@ namespace MSD.Systems.Analytics
 
 		private void OnValidate()
 		{
-			_nameFormatter.Validate();
+			_eventContext.Validate();
 			_parameterFormatter.Validate();
 
 			_validationLogs.Clear();

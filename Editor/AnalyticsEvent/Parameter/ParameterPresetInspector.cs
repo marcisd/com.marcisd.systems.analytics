@@ -13,7 +13,7 @@ namespace MSD.Systems.Analytics.Editor
 	[CanEditMultipleObjects]
 	public class ParameterPresetInspector : UnityEditor.Editor 
 	{
-		private ParameterPreset ParameterPreset => target as ParameterPreset;
+		private ParameterPreset Target => target as ParameterPreset;
 
 		public override void OnInspectorGUI() 
 		{
@@ -31,7 +31,7 @@ namespace MSD.Systems.Analytics.Editor
 
 		public void DrawValidation()
 		{
-			if (!ParameterPreset.IsValid) {
+			if (!Target.IsValid) {
 				EditorGUILayout.HelpBox("Naming violation!", MessageType.Error);
 			}
 		}

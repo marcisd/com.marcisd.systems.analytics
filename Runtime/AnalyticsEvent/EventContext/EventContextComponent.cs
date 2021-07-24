@@ -10,32 +10,25 @@ Date:		17/06/2020 08:13
 
 namespace MSD.Systems.Analytics
 {
-	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Event Name Section", order = 3)]
-	public class EventNameSection : ScriptableObject
+	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Event Context Component", order = 3)]
+	public class EventContextComponent : ScriptableObject
 	{
-		public enum SectionType
-		{
-			Classification,
-			Subject,
-			Verb,
-		}
-
 		protected static readonly Regex UPPER_CAMEL_CASE_REGEX = new Regex(@"^[A-Z][A-Za-z0-9]+$");
 
 		[SerializeField]
 		private string _value = string.Empty;
 
 		[SerializeField]
-		private SectionType _type = SectionType.Subject;
+		private EventContextComponentType _type = EventContextComponentType.Subject;
 
 		public string Value => _value;
 
-		public SectionType Type => _type;
+		public EventContextComponentType Type => _type;
 
 		public bool IsValid => UPPER_CAMEL_CASE_REGEX.IsMatch(_value);
 
 		public override string ToString() => _value;
 
-		public static implicit operator string(EventNameSection nameSection) => nameSection._value;
+		public static implicit operator string(EventContextComponent nameSection) => nameSection._value;
 	}
 }

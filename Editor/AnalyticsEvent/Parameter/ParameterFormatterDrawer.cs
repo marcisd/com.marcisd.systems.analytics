@@ -88,6 +88,7 @@ namespace MSD.Systems.Analytics.Editor
 		private void DrawElementCallback(Rect rect, int index)
 		{
 			Rect objRect = new Rect(rect) {
+				y = rect.y + EditorGUIUtility.standardVerticalSpacing,
 				height = EditorGUIUtility.singleLineHeight,
 			};
 			Rect nameRect = new Rect(objRect) {
@@ -111,7 +112,7 @@ namespace MSD.Systems.Analytics.Editor
 				SerializedObject elementObj = new SerializedObject(elementProp.objectReferenceValue);
 				SerializedProperty nameProp = elementObj.FindProperty("_name");
 				SerializedProperty typeProp = elementObj.FindProperty("_type");
-				using (new EditorGUILabelWidthScope(50f))
+				using (new EditorGUILabelWidthScope(40f))
 				using (new EditorGUI.DisabledScope(true)) {
 					EditorGUI.PropertyField(nameRect, nameProp);
 					EditorGUI.PropertyField(typeRect, typeProp);

@@ -25,7 +25,7 @@ namespace MSD.Systems.Analytics.Editor
 			}
 		}
 
-		private AnalyticsService AnalyticsService => target as AnalyticsService;
+		private AnalyticsService Target => target as AnalyticsService;
 
 		public override void OnInspectorGUI()
 		{
@@ -35,10 +35,10 @@ namespace MSD.Systems.Analytics.Editor
 
 			string spec = "<b>Event Name Format Specifier</b>\n";
 			spec += "\n";
-			spec += $"{AnalyticsService.EventNameFormatBlob}\n";
+			spec += $"{Target.EventNameFormatBlob}\n";
 			spec += "\n";
-			spec += $"<b>Separator:</b>\t\t\"{AnalyticsService.EventNameFormatSpecifier.Separator}\"\n";
-			spec += $"<b>Max Character Count:</b>\t{AnalyticsService.EventNameFormatSpecifier.MaxCharacterCount}";
+			spec += $"<b>Separator:</b>\t\t\"{Target.EventNameFormatSpecifier.Separator}\"\n";
+			spec += $"<b>Max Character Count:</b>\t{Target.EventNameFormatSpecifier.MaxCharacterCount}";
 
 			EditorGUILayout.LabelField(spec, Style);
 		}

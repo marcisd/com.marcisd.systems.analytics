@@ -13,7 +13,7 @@ namespace MSD.Systems.Analytics.Editor
 	[CustomEditor(typeof(AnalyticsEvent))]
 	public class AnalyticsEventInspector : UnityEditor.Editor 
 	{
-		private AnalyticsEvent AnalyticsEvent => target as AnalyticsEvent;
+		private AnalyticsEvent Target => target as AnalyticsEvent;
 
 		public override void OnInspectorGUI()
 		{
@@ -29,7 +29,7 @@ namespace MSD.Systems.Analytics.Editor
 		private void DrawApplyButton() 
 		{
 			if (GUILayout.Button("Apply Format")) {
-				AnalyticsEvent.Apply();
+				Target.Apply();
 				EditorUtility.SetDirty(target);
 				Repaint();
 			}
@@ -37,7 +37,7 @@ namespace MSD.Systems.Analytics.Editor
 
 		private void DrawHealthCheck() 
 		{
-			if (!AnalyticsEvent.IsFormatUpToDate) {
+			if (!Target.IsFormatUpToDate) {
 				EditorGUILayout.HelpBox("Format is out of date. Re-apply the format and input the parameter values again.", MessageType.Warning);
 			}
 		}
@@ -52,11 +52,11 @@ namespace MSD.Systems.Analytics.Editor
 		{
 			bool isDisabled = true;
 			if(EditorApplication.isPlaying) {
-				isDisabled = !AnalyticsEvent.IsServiceInitialized;
+				isDisabled = !Target.IsServiceInitialized;
 			}
 
 			using(new EditorGUI.DisabledGroupScope(isDisabled)) {
-				if(GUILayout.Button("Log Analytics Event")) { AnalyticsEvent.LogAnalyticsEvent(); }
+				if(GUILayout.Button("Log Analytics Event")) { Target.LogAnalyticsEvent(); }
 			}
 		}
 	}

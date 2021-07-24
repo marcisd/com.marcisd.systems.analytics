@@ -27,6 +27,6 @@ namespace MSD.Systems.Analytics
 
 		public bool IsValid => LOWER_SNAKE_CASE_REGEX.IsMatch(_name);
 
-		public override string ToString() => $"{_name}:{_type}";
+		public override string ToString() => $"{_name}: {_type}";
 	}
 }

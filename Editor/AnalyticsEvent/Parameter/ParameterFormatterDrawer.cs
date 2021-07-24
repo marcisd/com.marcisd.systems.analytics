@@ -14,8 +14,8 @@ namespace MSD.Systems.Analytics.Editor
 	[CustomPropertyDrawer(typeof(ParameterFormatter))]
 	public class ParameterFormatterDrawer : PropertyDrawer
 	{
-		private SerializedProperty _presetsProp = null;
-		private ReorderableList _reorderableList = null;
+		private SerializedProperty _presetsProp;
+		private ReorderableList _reorderableList;
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
@@ -75,12 +75,12 @@ namespace MSD.Systems.Analytics.Editor
 					// TODO: Convert x to discard when C#9.0 is out
 					drawElementCallback = (rect, index, x, _) => DrawElementCallback(rect, index),
 					elementHeight = EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing * 2,
-					onAddCallback = OnAddCallback,
+					onAddCallback = (_) => OnAddCallback(),
 				};
 			}
 		}
 
-		private void OnAddCallback(ReorderableList reorderableList)
+		private void OnAddCallback()
 		{
 			Add(null);
 		}

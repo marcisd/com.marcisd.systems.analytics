@@ -9,7 +9,7 @@ Date:		24/07/2021 12:20
 
 namespace MSD.Systems.Analytics
 {
-    public struct EventNameFormatSpecifier
+    public class EventNameFormatSpecifier
     {
         private readonly string _separator;
 

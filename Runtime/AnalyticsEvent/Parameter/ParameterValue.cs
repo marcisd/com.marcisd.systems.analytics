@@ -13,12 +13,20 @@ namespace MSD.Systems.Analytics
 	[Serializable]
 	public class ParameterValue
 	{
-		[SerializeField] private ParameterType _type;
+		[SerializeField]
+		private ParameterType _type;
 
-		[SerializeField] private BoolReference _boolReference;
-		[SerializeField] private FloatReference _floatReference;
-		[SerializeField] private IntReference _intReference;
-		[SerializeField] private StringReference _stringReference;
+		[SerializeField]
+		private BoolReference _boolReference;
+
+		[SerializeField]
+		private FloatReference _floatReference;
+
+		[SerializeField]
+		private IntReference _intReference;
+
+		[SerializeField]
+		private StringReference _stringReference;
 
 		public ParameterValue(ParameterType type)
 		{
@@ -82,18 +90,13 @@ namespace MSD.Systems.Analytics
 
 		public override string ToString()
 		{
-			switch (_type) {
-				case ParameterType.Bool:
-					return _boolReference.Value.ToString();
-				case ParameterType.Float:
-					return _floatReference.Value.ToString();
-				case ParameterType.Int:
-					return _intReference.Value.ToString();
-				case ParameterType.String:
-					return _stringReference.Value;
-				default:
-					return string.Empty;
-			}
+			return _type switch {
+				ParameterType.Bool => _boolReference.Value.ToString(),
+				ParameterType.Float => _floatReference.Value.ToString(),
+				ParameterType.Int => _intReference.Value.ToString(),
+				ParameterType.String => _stringReference.Value,
+				_ => string.Empty,
+			};
 		}
 	}
 }

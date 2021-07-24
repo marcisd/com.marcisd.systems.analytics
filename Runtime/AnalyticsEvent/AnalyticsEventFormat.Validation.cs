@@ -69,7 +69,7 @@ namespace MSD.Systems.Analytics
 		{
 			public override string Log => "Invalid parameter name format for one or more parameters";
 
-			public override bool Test(AnalyticsEventFormat format) => !format._parameterFormatter.isValid;
+			public override bool Test(AnalyticsEventFormat format) => !format._parameterFormatter.IsValid;
 		}
 	}
 }

@@ -33,35 +33,39 @@ namespace MSD.Systems.Analytics
 
 		protected abstract string DebugPrefix { get; }
 
+		internal virtual void Bootstrap() { }
+
 		internal void Initialize()
 		{
-			if (IsInitialized) { return; }
-
-			DoInitialize();
-			IsInitialized = true;
+			if (!IsInitialized) {
+				DoInitialize();
+				IsInitialized = true;
+			}
 		}
 
 		public void LogEvent(AnalyticsEvent analyticsEvent)
 		{
-			if (!CheckLoggingAvailability()) { return; }
-
-			if (analyticsEvent.Parameters.Count == 0) {
-				DoLogEvent(analyticsEvent.EventName);
-			} else {
-				DoLogEvent(analyticsEvent.EventName, analyticsEvent.Parameters);
+			if (CheckLoggingAvailability()) {
+				if (analyticsEvent.Parameters.Count == 0) {
+					DoLogEvent(analyticsEvent.EventName);
+				} else {
+					DoLogEvent(analyticsEvent.EventName, analyticsEvent.Parameters);
+				}
 			}
 		}
 
 		public void LogEvent(string eventName)
 		{
-			if (!CheckLoggingAvailability()) { return; }
-			DoLogEvent(eventName);
+			if (CheckLoggingAvailability()) {
+				DoLogEvent(eventName);
+			}
 		}
 
 		public void LogEvent(string eventName, Parameters parameters)
 		{
-			if (!CheckLoggingAvailability()) { return; }
-			DoLogEvent(eventName, parameters);
+			if (CheckLoggingAvailability()) {
+				DoLogEvent(eventName, parameters);
+			}
 		}
 
 		protected abstract void DoInitialize();

@@ -27,7 +27,22 @@ namespace MSD.Systems.Analytics
 
 		protected override string DebugPrefix => DEBUG_PREFIX;
 
-		protected override void DoInitialize() { }
+		internal override void Bootstrap()
+		{
+			// Unity Analytics auto-initializes by default
+			// but can be flagged to delay initialization
+			if (!AnalyticsConfig.ShouldInitializeOnAppStart) {
+				UnityAnalytics.initializeOnStartup = false;
+			}
+		}
+
+		protected override void DoInitialize()
+		{
+			// If auto-initialization was prevented
+			if (!UnityAnalytics.initializeOnStartup) {
+				UnityAnalytics.ResumeInitialization();
+			}
+		}
 
 		protected override void DoLogEvent(string eventName)
 		{
@@ -44,7 +59,7 @@ namespace MSD.Systems.Analytics
 		{
 			_parameters.Clear();
 			foreach (var parameter in parameters) {
-				_parameters.Add(parameter.Key, parameter.Value.objectValue);
+				_parameters.Add(parameter.Key, parameter.Value.ObjectValue);
 			}
 		}
 	}

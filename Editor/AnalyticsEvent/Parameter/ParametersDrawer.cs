@@ -28,21 +28,20 @@ namespace MSD.Systems.Analytics.Editor
 		private void InitRelativeProperties(SerializedProperty property)
 		{
 			_serializedObject = property.serializedObject;
-
 			_keysProperty = property.FindPropertyRelative("_keys");
 			_valuesProperty = property.FindPropertyRelative("_values");
 		}
 
 		private void InitReorderableList()
 		{
-			if (_reorderableList != null)
-				return;
-
-			_reorderableList = new ReorderableList(_serializedObject, _keysProperty, false, true, false, false) {
-				drawHeaderCallback = DrawHeaderCallback,
-				drawElementCallback = DrawElementCallback,
-				elementHeightCallback = ElementHeightCallback
-			};
+			if (_reorderableList == null) {
+				_reorderableList = new ReorderableList(_serializedObject, _keysProperty, false, true, false, false) {
+					drawHeaderCallback = (rect) => EditorGUI.PrefixLabel(rect, new GUIContent("Parameters")),
+					// TODO: Convert x to discard when C#9.0 is out
+					drawElementCallback = (rect, index, x, _) => DrawElementCallback(rect, index),
+					elementHeightCallback = (_) => ParameterEditor.StandardHeight,
+				};
+			}
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -57,24 +56,10 @@ namespace MSD.Systems.Analytics.Editor
 			return _reorderableList.GetHeight();
 		}
 
-		#region ReorderableList
-
-		private void DrawElementCallback(Rect rect, int index, bool isActive, bool isFocused)
+		private void DrawElementCallback(Rect rect, int index)
 		{
-			var editor = new ParameterEditor(_keysProperty.GetArrayElementAtIndex(index), _valuesProperty.GetArrayElementAtIndex(index));
+			ParameterEditor editor = new ParameterEditor(_keysProperty.GetArrayElementAtIndex(index), _valuesProperty.GetArrayElementAtIndex(index));
 			editor.Draw(rect);
 		}
-
-		private float ElementHeightCallback(int index)
-		{
-			return ParameterEditor.standardHeight;
-		}
-
-		private void DrawHeaderCallback(Rect rect)
-		{
-			EditorGUI.PrefixLabel(rect, new GUIContent("Parameters"));
-		}
-
-		#endregion ReorderableList
 	}
 }

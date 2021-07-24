@@ -60,8 +60,7 @@ namespace MSD.Systems.Analytics
 		private bool ValidParameterPreset(ParameterPreset parameterPreset)
 		{
 			// since we ignore null presets
-			if (parameterPreset == null) return true;
-			return parameterPreset.IsValid;
+			return parameterPreset == null ? true : parameterPreset.IsValid;
 		}
 	}
 }

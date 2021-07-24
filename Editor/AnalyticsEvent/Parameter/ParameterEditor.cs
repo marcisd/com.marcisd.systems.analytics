@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using MSD.Editor;
 
 /*===============================================================
 Project:	Analytics
@@ -13,10 +12,10 @@ namespace MSD.Systems.Analytics.Editor
 {
 	public class ParameterEditor 
 	{
-		private SerializedProperty _keyProp;
-		private SerializedProperty _valueProp;
+		private readonly SerializedProperty _keyProp;
+		private readonly SerializedProperty _valueProp;
 
-		private SerializedProperty _typeProp;
+		private readonly SerializedProperty _typeProp;
 
 		public ParameterEditor(SerializedProperty keyProp, SerializedProperty valueProp)
 		{
@@ -62,15 +61,12 @@ namespace MSD.Systems.Analytics.Editor
 					case ParameterType.String:
 						EditorGUI.PropertyField(valueRect, _valueProp.FindPropertyRelative("_stringReference"), valueLabel);
 						break;
+					default:
+						break;
 				}
 			}
 		}
 
-		public static float standardHeight
-		{
-			get {
-				return EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing * 2;
-			}
-		}
+		public static float StandardHeight => EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing * 2;
 	}
 }

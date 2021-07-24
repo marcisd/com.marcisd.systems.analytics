@@ -48,6 +48,7 @@ namespace MSD.Systems.Analytics
 		}
 
 #if UNITY_EDITOR
+
 		[SerializeField]
 		private AnalyticsEventFormat _format;
 

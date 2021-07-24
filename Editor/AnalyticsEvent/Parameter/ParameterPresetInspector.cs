@@ -25,16 +25,13 @@ namespace MSD.Systems.Analytics.Editor
 
 		public void DrawInfo()
 		{
-			string parameterNameHelp = "Naming:\t\tUse lower_snake_case for Parameter names";
-			parameterNameHelp += "\n\n";
-			parameterNameHelp += "Validation:\ta-z, 0-9, Underscore (_) are valid characters for Parameter names.";
-
-			EditorGUILayout.HelpBox(parameterNameHelp, MessageType.Info);
+			EditorGUILayout.HelpBox("Use lower_snake_case for Parameter names.", MessageType.Info);
+			EditorGUILayout.HelpBox("Validation: a-z, 0-9, Underscore (_) are valid characters for Parameter names.", MessageType.Info);
 		}
 
 		public void DrawValidation()
 		{
-			if (!Target.IsValid) {
+			if (!ParameterPreset.IsValid) {
 				EditorGUILayout.HelpBox("Naming violation!", MessageType.Error);
 			}
 		}

@@ -72,7 +72,8 @@ namespace MSD.Systems.Analytics.Editor
 				_presetsProp = property.FindPropertyRelative("_presets");
 				_reorderableList = new ReorderableList(property.serializedObject, _presetsProp) {
 					drawHeaderCallback = (rect) => EditorGUI.LabelField(rect, label),
-					drawElementCallback = DrawElementCallback,
+					// TODO: Convert x to discard when C#9.0 is out
+					drawElementCallback = (rect, index, x, _) => DrawElementCallback(rect, index),
 					elementHeight = EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing * 2,
 					onAddCallback = OnAddCallback,
 				};
@@ -84,7 +85,7 @@ namespace MSD.Systems.Analytics.Editor
 			Add(null);
 		}
 
-		private void DrawElementCallback(Rect rect, int index, bool isActive, bool isFocused)
+		private void DrawElementCallback(Rect rect, int index)
 		{
 			Rect objRect = new Rect(rect) {
 				height = EditorGUIUtility.singleLineHeight,

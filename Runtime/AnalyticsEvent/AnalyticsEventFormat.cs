@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
@@ -32,8 +33,9 @@ namespace MSD.Systems.Analytics
 		public AnalyticsService ServiceDestination => _serviceDestination;
 		public string EventName => _serviceDestination.EventNameFormatSpecifier.FormatEventName(_nameFormatter.NameSections());
 		public IDictionary<string, ParameterType> ParameterFormat => _parameterFormatter.GetParameterFormat();
-		public int ParameterCount => _parameterFormatter.count;
+		public int ParameterCount => _parameterFormatter.Count;
 
+		[field: NonSerialized]
 		public bool IsValid { get; private set; } = true;
 
 		private void OnValidate()
@@ -45,7 +47,7 @@ namespace MSD.Systems.Analytics
 			IsValid = true;
 
 			Validation.ForEachType((type) => {
-				var validation = Validation.Factory(type);
+				Validation validation = Validation.Factory(type);
 				if (validation.Test(this)) {
 					IsValid = false;
 					_validationLogs.Add(validation.Log);

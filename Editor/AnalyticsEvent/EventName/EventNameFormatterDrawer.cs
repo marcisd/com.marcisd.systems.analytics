@@ -34,8 +34,7 @@ namespace MSD.Systems.Analytics.Editor
 		{
 			LazyInitReoderableList(property, label);
 
-			return _reorderableList.GetHeight() + EditorGUIUtility.standardVerticalSpacing +
-				((EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * 2f);
+			return _reorderableList.GetHeight();
 		}
 
 		private void DragAndDropObjects(Rect rect)
@@ -67,18 +66,19 @@ namespace MSD.Systems.Analytics.Editor
 				_sectionsProp = property.FindPropertyRelative("_sections");
 				_reorderableList = new ReorderableList(property.serializedObject, _sectionsProp) {
 					drawHeaderCallback = (rect) => EditorGUI.LabelField(rect, label),
-					drawElementCallback = DrawElementCallback,
-					onAddCallback = OnAddCallback,
+					// TODO: Convert x to discard when C#9.0 is out
+					drawElementCallback = (rect, index, x, _) => DrawElementCallback(rect, index),
+					onAddCallback = (_) => OnAddCallback(),
 				};
 			}
 		}
 
-		private void OnAddCallback(ReorderableList reorderableList)
+		private void OnAddCallback()
 		{
 			Add(null);
 		}
 
-		private void DrawElementCallback(Rect rect, int index, bool isActive, bool isFocused)
+		private void DrawElementCallback(Rect rect, int index)
 		{
 			Rect objRect = new Rect(rect) {
 				height = EditorGUIUtility.singleLineHeight,

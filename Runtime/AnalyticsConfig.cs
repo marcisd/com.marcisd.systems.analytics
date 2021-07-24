@@ -16,6 +16,8 @@ namespace MSD.Systems.Analytics
 {
 	public class AnalyticsConfig : ScriptableConfig<AnalyticsConfig>
 	{
+		private static readonly string DEBUG_PREFIX = $"[{nameof(AnalyticsConfig)}]";
+
 		[Header("Runtime")]
 		[SerializeField]
 		private bool _shouldInitializeOnAppStart = true;
@@ -23,29 +25,46 @@ namespace MSD.Systems.Analytics
 		[SerializeField]
 		private List<AnalyticsService> _services = new List<AnalyticsService>();
 
+		internal static bool ShouldInitializeOnAppStart => Instance._shouldInitializeOnAppStart;
+
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void Initialize()
+		private static void Bootstrap()
 		{
+			foreach (AnalyticsService service in Instance._services) {
+				service.Bootstrap();
+			}
+
 			if (Instance._shouldInitializeOnAppStart) {
-				Debugger.Log("Initializing Analytics Services...");
-				foreach (AnalyticsService service in Instance._services) {
-					service.Initialize();
-				}
+				Initialize();
+			}
+		}
+
+		/// <summary>
+		/// Called on app start if auto-initialization is enabled.
+		/// Initialization can be triggered after app start but cannot perform actual initialization more than once.
+		/// </summary>
+		public static void Initialize()
+		{
+			Debugger.Log(DEBUG_PREFIX, "Initializing Analytics Services...");
+			foreach (AnalyticsService service in Instance._services) {
+				service.Initialize();
 			}
 		}
 
 #if UNITY_EDITOR
+
 		[Header("Editor")]
 		[SerializeField]
 		private bool _isEditorEventsAllowed;
 
-		public static bool IsEditorEventsAllowed => Instance._isEditorEventsAllowed;
+		internal static bool IsEditorEventsAllowed => Instance._isEditorEventsAllowed;
 
 		[MenuItem("MSD/Config/Analytics")]
 		private static void ShowConfig()
 		{
 			Selection.objects = new Object[] { Instance };
 		}
+
 #endif
 
 	}

@@ -40,28 +40,23 @@ namespace MSD.Systems.Analytics
 
 		private int CompareSections(EventNameSection lhs, EventNameSection rhs)
 		{
-			if (lhs == null) return -1;
-			if (rhs == null) return 1;
-			return (int)lhs.Type - (int)rhs.Type;
+			return lhs == null ? -1 : rhs == null ? 1 : (int)lhs.Type - (int)rhs.Type;
 		}
 
 		private bool ValidSection(EventNameSection eventNameSection)
 		{
 			// since we ignore null sections
-			if (eventNameSection == null) return true;
-			return eventNameSection.IsValid;
+			return eventNameSection == null ? true : eventNameSection.IsValid;
 		}
 
 		private bool IsVerbSection(EventNameSection eventNameSection)
 		{
-			if (eventNameSection == null) return false;
-			return eventNameSection.Type == EventNameSection.SectionType.Verb;
+			return eventNameSection == null ? false : eventNameSection.Type == EventNameSection.SectionType.Verb;
 		}
 
 		private bool IsClassificationSection(EventNameSection eventNameSection)
 		{
-			if (eventNameSection == null) return false;
-			return eventNameSection.Type == EventNameSection.SectionType.Classification;
+			return eventNameSection == null ? false : eventNameSection.Type == EventNameSection.SectionType.Classification;
 		}
 	}
 }

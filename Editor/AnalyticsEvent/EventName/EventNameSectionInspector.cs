@@ -25,11 +25,8 @@ namespace MSD.Systems.Analytics.Editor
 
 		public void DrawInfo()
 		{
-			string eventNameHelp = "Naming:\t\tUse UpperCamelCase for Event names";
-			eventNameHelp += "\n\n";
-			eventNameHelp += "Validation:\tA-Z, a-z, 0-9 are valid characters for Event names.";
-
-			EditorGUILayout.HelpBox(eventNameHelp, MessageType.Info);
+			EditorGUILayout.HelpBox("Use UpperCamelCase for Event names.", MessageType.Info);
+			EditorGUILayout.HelpBox("Validation: A-Z, a-z, 0-9 are valid characters for Event names.", MessageType.Info);
 		}
 
 		public void DrawValidation()

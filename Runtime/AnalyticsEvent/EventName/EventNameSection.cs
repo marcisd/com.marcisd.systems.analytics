@@ -10,7 +10,7 @@ Date:		17/06/2020 08:13
 
 namespace MSD.Systems.Analytics
 {
-	[CreateAssetMenu(menuName = "DMED/Systems/Analytics System/Event Name Section", order = 3)]
+	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Event Name Section", order = 3)]
 	public class EventNameSection : ScriptableObject
 	{
 		public enum SectionType

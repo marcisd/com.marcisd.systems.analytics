@@ -1,36 +1,42 @@
-using System;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 /*===============================================================
 Project:	Analytics
 Developer:	Marci San Diego
-Company:	DefaultCompany - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		29/01/2019 20:36
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem
+namespace MSD.Systems.Analytics
 {
-	[CreateAssetMenu(menuName = "DMED/Systems/Analytics System/Analytics Event", order = 1)]
+	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Analytics Event", order = 1)]
 	public class AnalyticsEvent : ScriptableObject
 	{
 		[HelpBox("Read-only values are derived from the AnalyticsEventFormat.")]
-		[ReadOnly] [SerializeField] private AnalyticsServiceBase _serviceDestination;
-		[ReadOnly] [SerializeField] private string _eventName;
-		[SerializeField] private Parameters _parameters = null;
+		[ReadOnly]
+		[SerializeField]
+		private AnalyticsService _serviceDestination;
 
-		public bool isServiceInitialized => _serviceDestination.isInitialized;
+		[ReadOnly]
+		[SerializeField]
+		private string _eventName;
 
-		public string eventName => _eventName;
+		[SerializeField]
+		private Parameters _parameters;
 
-		public Parameters parameters => _parameters;
+		public bool IsServiceInitialized => _serviceDestination.IsInitialized;
+
+		public string EventName => _eventName;
+
+		public Parameters Parameters => _parameters;
 
 		public void LogAnalyticsEvent()
 		{
 			Debugger.Log(
 				$"[Analytics] Sending analytics event." + Environment.NewLine +
 				$"Name [{_eventName}]" + Environment.NewLine +
-				parameters.ToString()
+				Parameters.ToString()
 			);
 
 			_serviceDestination.LogEvent(this);
@@ -38,21 +44,22 @@ namespace DMED.Systems.AnalyticsSystem
 
 		public override string ToString()
 		{
-			return "Name: " + eventName + "; " + parameters;
+			return "Name: " + EventName + "; " + Parameters;
 		}
 
 #if UNITY_EDITOR
-		[SerializeField] private AnalyticsEventFormat _format;
+		[SerializeField]
+		private AnalyticsEventFormat _format;
 
 		[SerializeField]
 		[HideInInspector]
 		private string _eventFormatCache = string.Empty;
 
-		public bool isFormatUpToDate => _eventFormatCache == formatString;
+		public bool IsFormatUpToDate => _eventFormatCache == FormatString;
 
-		private string formatString => format != null ? format.ToString() : string.Empty;
+		private string FormatString => Format != null ? Format.ToString() : string.Empty;
 
-		public AnalyticsEventFormat format {
+		public AnalyticsEventFormat Format {
 			get { return _format; }
 			set {
 				if (SetPropertyUtility.SetClass(ref _format, value)) {
@@ -66,7 +73,7 @@ namespace DMED.Systems.AnalyticsSystem
 			if (_format == null) {
 				UnityEditor.EditorUtility.DisplayDialog("Analytics Event", "Assign an Analytics Event Format first.", "Ok");
 			} else {
-				if (_format.isValid) {
+				if (_format.IsValid) {
 					ApplyFormat();
 				} else {
 					UnityEditor.EditorUtility.DisplayDialog("Analytics Event", "Analytics Event Format must be valid.", "Ok");
@@ -77,15 +84,15 @@ namespace DMED.Systems.AnalyticsSystem
 		private void ApplyFormat()
 		{
 			if (_format != null) {
-				_serviceDestination = format.serviceDestination;
-				_eventName = _format.eventName;
+				_serviceDestination = Format.ServiceDestination;
+				_eventName = _format.EventName;
 
 				_parameters.Clear();
-				foreach (var paramFormat in _format.parameterFormat) {
+				foreach (var paramFormat in _format.ParameterFormat) {
 					_parameters.Add(paramFormat.Key, new ParameterValue(paramFormat.Value));
 				}
 
-				_eventFormatCache = format.ToString();
+				_eventFormatCache = Format.ToString();
 			}
 		}
 #endif

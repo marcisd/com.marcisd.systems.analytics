@@ -1,22 +1,21 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using DMED.Editor;
 
 /*===============================================================
-Project:	Poop Deck
+Project:	Analytics
 Developer:	Marci San Diego
-Company:	David Morgan Education - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		17/06/2020 21:55
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem.Editor
+namespace MSD.Systems.Analytics.Editor
 {
 	[CustomPropertyDrawer(typeof(ParameterFormatter))]
 	public class ParameterFormatterDrawer : PropertyDrawer
 	{
-		SerializedProperty _presetsProp = null;
-		ReorderableList _reorderableList = null;
+		private SerializedProperty _presetsProp = null;
+		private ReorderableList _reorderableList = null;
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
@@ -25,12 +24,10 @@ namespace DMED.Systems.AnalyticsSystem.Editor
 			Rect rListPos = new Rect(position) {
 				height = _reorderableList.GetHeight(),
 			};
-
 			Rect countPos = new Rect(position) {
 				y = rListPos.y + rListPos.height,
 				height = EditorGUIUtility.singleLineHeight,
 			};
-
 
 			_reorderableList.DoList(rListPos);
 

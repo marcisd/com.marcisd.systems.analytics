@@ -4,30 +4,40 @@ using UnityEngine;
 /*===============================================================
 Project:	Analytics
 Developer:	Marci San Diego
-Company:	DefaultCompany - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		30/01/2019 21:03
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem 
+namespace MSD.Systems.Analytics
 {
-	using Analytics = UnityEngine.Analytics.Analytics;
+	using UnityAnalytics = UnityEngine.Analytics.Analytics;
 
-	[CreateAssetMenu(menuName = "DMED/Systems/Analytics System/Unity Analytics Service", order = 51)]
-	public class UnityAnalyticsService : AnalyticsServiceBase
+	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Unity Analytics Service", order = 51)]
+	public class UnityAnalyticsService : AnalyticsService
 	{
-		private Dictionary<string, object> _parameters = new Dictionary<string, object>();
+		private static readonly string DEBUG_PREFIX = $"[{nameof(UnityAnalyticsService)}]";
+
+		private readonly Dictionary<string, object> _parameters = new Dictionary<string, object>();
+
+		public override EventNameFormatSpecifier EventNameFormatSpecifier => new EventNameFormatSpecifier(".", 100);
+
+#if UNITY_EDITOR
+		public override string EventNameFormatBlob => "Custom event names should have at most 100 characters.";
+#endif
+
+		protected override string DebugPrefix => DEBUG_PREFIX;
 
 		protected override void DoInitialize() { }
 
 		protected override void DoLogEvent(string eventName)
 		{
-			Analytics.CustomEvent(eventName);
+			UnityAnalytics.CustomEvent(eventName);
 		}
 
 		protected override void DoLogEvent(string eventName, Parameters parameters)
 		{
 			ProcessParameters(parameters);
-			Analytics.CustomEvent(eventName, _parameters);
+			UnityAnalytics.CustomEvent(eventName, _parameters);
 		}
 
 		private void ProcessParameters(Parameters parameters)

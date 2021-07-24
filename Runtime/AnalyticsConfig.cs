@@ -6,29 +6,29 @@ using UnityEditor;
 #endif
 
 /*===============================================================
-Project:    Poop Deck
-Developer:  Admor Aguilar
-Company:    David Morgan Education - admora@dm-ed.com
+Project:	Analytics
+Developer:	Marci San Diego
+Company:	Personal - marcisandiego@gmail.com
 Date:       16/03/2020 16:30
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem
+namespace MSD.Systems.Analytics
 {
-	public class AnalyticsConfig : ScriptableConfigBase<AnalyticsConfig>
+	public class AnalyticsConfig : ScriptableConfig<AnalyticsConfig>
 	{
 		[Header("Runtime")]
 		[SerializeField]
 		private bool _shouldInitializeOnAppStart = true;
 
 		[SerializeField]
-		private List<AnalyticsServiceBase> _services = new List<AnalyticsServiceBase>();
+		private List<AnalyticsService> _services = new List<AnalyticsService>();
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		private static void Initialize()
 		{
 			if (Instance._shouldInitializeOnAppStart) {
 				Debugger.Log("Initializing Analytics Services...");
-				foreach (AnalyticsServiceBase service in Instance._services) {
+				foreach (AnalyticsService service in Instance._services) {
 					service.Initialize();
 				}
 			}
@@ -37,12 +37,12 @@ namespace DMED.Systems.AnalyticsSystem
 #if UNITY_EDITOR
 		[Header("Editor")]
 		[SerializeField]
-		private bool _isEditorEventsAllowed = false;
+		private bool _isEditorEventsAllowed;
 
-		public static bool isEditorEventsAllowed => Instance._isEditorEventsAllowed;
+		public static bool IsEditorEventsAllowed => Instance._isEditorEventsAllowed;
 
-		[MenuItem("DMED/Config/Analytics Configuration")]
-		private static void ShowAnalyticsConfig()
+		[MenuItem("MSD/Config/Analytics")]
+		private static void ShowConfig()
 		{
 			Selection.objects = new Object[] { Instance };
 		}

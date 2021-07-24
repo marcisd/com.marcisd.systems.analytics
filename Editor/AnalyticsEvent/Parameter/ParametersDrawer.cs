@@ -1,15 +1,15 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 
 /*===============================================================
 Project:	Analytics
 Developer:	Marci San Diego
-Company:	DefaultCompany - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		30/01/2019 14:26
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem.Editor 
+namespace MSD.Systems.Analytics.Editor 
 {
 	[CustomPropertyDrawer(typeof(Parameters))]
 	public class ParametersDrawer : PropertyDrawer
@@ -29,8 +29,8 @@ namespace DMED.Systems.AnalyticsSystem.Editor
 		{
 			_serializedObject = property.serializedObject;
 
-			_keysProperty = property.FindPropertyRelative("keys");
-			_valuesProperty = property.FindPropertyRelative("values");
+			_keysProperty = property.FindPropertyRelative("_keys");
+			_valuesProperty = property.FindPropertyRelative("_values");
 		}
 
 		private void InitReorderableList()

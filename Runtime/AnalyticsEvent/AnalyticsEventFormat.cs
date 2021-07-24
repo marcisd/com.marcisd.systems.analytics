@@ -1,37 +1,40 @@
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
 /*===============================================================
 Project:	Analytics
 Developer:	Marci San Diego
-Company:	DefaultCompany - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		29/01/2019 21:51
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem
+namespace MSD.Systems.Analytics
 {
-	[CreateAssetMenu(menuName = "DMED/Systems/Analytics System/Analytics Event Format", order = 2)]
+	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Analytics Event Format", order = 2)]
 	public partial class AnalyticsEventFormat : ScriptableObject
 	{
-		[SerializeField] private AnalyticsServiceBase _serviceDestination = null;
+		[SerializeField]
+		private AnalyticsService _serviceDestination;
 
 		[Space]
-		[SerializeField] private EventNameFormatter _nameFormatter = null;
+		[SerializeField]
+		private EventNameFormatter _nameFormatter;
 
 		[Space]
-		[SerializeField] private ParameterFormatter _parameterFormatter = null;
+		[SerializeField]
+		private ParameterFormatter _parameterFormatter;
 
 		[HideInInspector]
-		[SerializeField] private List<string> _validationLogs = new List<string>();
+		[SerializeField]
+		private List<string> _validationLogs = new List<string>();
 
-		public AnalyticsServiceBase serviceDestination => _serviceDestination;
-		public string eventName => _nameFormatter.ToString();
-		public IDictionary<string, ParameterType> parameterFormat => _parameterFormatter.GetParameterFormat();
-		public int parameterCount => _parameterFormatter.count;
+		public AnalyticsService ServiceDestination => _serviceDestination;
+		public string EventName => _serviceDestination.EventNameFormatSpecifier.FormatEventName(_nameFormatter.NameSections());
+		public IDictionary<string, ParameterType> ParameterFormat => _parameterFormatter.GetParameterFormat();
+		public int ParameterCount => _parameterFormatter.count;
 
-		public bool isValid { get; private set; } = true;
+		public bool IsValid { get; private set; } = true;
 
 		private void OnValidate()
 		{
@@ -39,20 +42,20 @@ namespace DMED.Systems.AnalyticsSystem
 			_parameterFormatter.Validate();
 
 			_validationLogs.Clear();
-			isValid = true;
+			IsValid = true;
 
 			Validation.ForEachType((type) => {
 				var validation = Validation.Factory(type);
 				if (validation.Test(this)) {
-					isValid = false;
-					_validationLogs.Add(validation.log);
+					IsValid = false;
+					_validationLogs.Add(validation.Log);
 				}
 			});
 		}
 
 		public override string ToString()
 		{
-			StringBuilder sb = new StringBuilder(eventName);
+			StringBuilder sb = new StringBuilder(EventName);
 			sb.Append(":");
 			sb.Append(_parameterFormatter);
 			return sb.ToString();

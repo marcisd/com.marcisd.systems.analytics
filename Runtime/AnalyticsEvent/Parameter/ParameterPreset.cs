@@ -1,16 +1,16 @@
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using UnityEngine;
 
 /*===============================================================
-Project:	Poop Deck
+Project:	Analytics
 Developer:	Marci San Diego
-Company:	David Morgan Education - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		17/06/2020 11:41
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem
+namespace MSD.Systems.Analytics
 {
-	[CreateAssetMenu(menuName = "DMED/Systems/Analytics System/Parameter Preset", order = 4)]
+	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Parameter Preset", order = 5)]
 	public class ParameterPreset : ScriptableObject
 	{
 		protected static readonly Regex LOWER_SNAKE_CASE_REGEX = new Regex(@"^[a-z][a-z0-9_]+$");
@@ -21,11 +21,11 @@ namespace DMED.Systems.AnalyticsSystem
 		[SerializeField]
 		private ParameterType _type = ParameterType.String;
 
-		public new string name => _name;
+		public string Name => _name;
 
-		public ParameterType type => _type;
+		public ParameterType Type => _type;
 
-		public bool isValid => LOWER_SNAKE_CASE_REGEX.IsMatch(_name);
+		public bool IsValid => LOWER_SNAKE_CASE_REGEX.IsMatch(_name);
 
 		public override string ToString() => $"{_name}:{_type}";
 	}

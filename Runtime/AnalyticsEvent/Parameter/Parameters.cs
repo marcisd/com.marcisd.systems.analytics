@@ -1,14 +1,14 @@
-using System;
+﻿using System;
 using System.Text;
 
 /*===============================================================
 Project:	Analytics
 Developer:	Marci San Diego
-Company:	DefaultCompany - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		30/01/2019 01:16
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem 
+namespace MSD.Systems.Analytics 
 {
 	[Serializable]
 	public class Parameters : SerializableDictionary<string, ParameterValue>
@@ -19,8 +19,8 @@ namespace DMED.Systems.AnalyticsSystem
 			foreach (var pair in this) {
 				sb.Append(pair.Key);
 				sb.Append(": ");
-				sb.Append(string.Format("({0})", pair.Value.type));
-				sb.Append(pair.Value.objectValue);
+				sb.Append(string.Format("({0})", pair.Value.Type));
+				sb.Append(pair.Value.ObjectValue);
 				sb.Append(", ");
 			}
 			sb.Append("]");

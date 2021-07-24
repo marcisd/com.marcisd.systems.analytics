@@ -1,14 +1,14 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 /*===============================================================
 Project:	Analytics
 Developer:	Marci San Diego
-Company:	DefaultCompany - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		30/01/2019 12:23
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem 
+namespace MSD.Systems.Analytics 
 {
 	[Serializable]
 	public class ParameterValue
@@ -26,7 +26,7 @@ namespace DMED.Systems.AnalyticsSystem
 			ResetReferences();
 		}
 
-		public ParameterType type {
+		public ParameterType Type {
 			get { return _type; }
 			set {
 				if (_type != value) {
@@ -36,42 +36,37 @@ namespace DMED.Systems.AnalyticsSystem
 			}
 		}
 
-		public object objectValue {
+		public object ObjectValue {
 			get {
-				switch (_type) {
-					case ParameterType.Bool:
-						return _boolReference.Value as object;
-					case ParameterType.Float:
-						return _floatReference.Value as object;
-					case ParameterType.Int:
-						return _intReference.Value as object;
-					case ParameterType.String:
-						return _stringReference.Value as object;
-					default:
-						return null;
-				}
+				return _type switch {
+					ParameterType.Bool => _boolReference.Value,
+					ParameterType.Float => _floatReference.Value,
+					ParameterType.Int => _intReference.Value,
+					ParameterType.String => _stringReference.Value,
+					_ => null,
+				};
 			}
 		}
 
-		public bool boolValue {
+		public bool BoolValue {
 			get {
 				return _boolReference.Value;
 			}
 		}
 
-		public float floatValue {
+		public float FloatValue {
 			get {
 				return _floatReference.Value;
 			}
 		}
 
-		public int intValue {
+		public int IntValue {
 			get {
 				return _intReference.Value;
 			}
 		}
 
-		public string stringValue {
+		public string StringValue {
 			get {
 				return _stringReference.Value;
 			}

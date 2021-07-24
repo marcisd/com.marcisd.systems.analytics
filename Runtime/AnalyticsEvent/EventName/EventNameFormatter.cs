@@ -1,77 +1,67 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 /*===============================================================
-Project:	Poop Deck
+Project:	Analytics
 Developer:	Marci San Diego
-Company:	David Morgan Education - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		17/06/2020 08:22
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem
+namespace MSD.Systems.Analytics
 {
 	[Serializable]
 	public class EventNameFormatter
 	{
 		[SerializeField]
-		private string _separator = ".";
-
-		[SerializeField]
 		private List<EventNameSection> _sections = new List<EventNameSection>();
 
-		public bool isValid => isValidName && isValidFormat;
+		public bool IsValid => IsValidName && IsValidFormat;
 
-		public bool isValidName => _sections.All(ValidSection);
+		public bool IsValidName => _sections.All(ValidSection);
 
-		public bool isValidFormat => hasExactlyOneClassification && hasExactlyOneVerb;
+		public bool IsValidFormat => HasExactlyOneClassification && HasExactlyOneVerb;
 
-		private bool hasExactlyOneClassification => _sections.Where(IsClassificationSection).Take(2).Count() == 1;
+		private bool HasExactlyOneClassification => _sections.Where(IsClassificationSection).Take(2).Count() == 1;
 
-		private bool hasExactlyOneVerb => _sections.Where(IsVerbSection).Take(2).Count() == 1;
+		private bool HasExactlyOneVerb => _sections.Where(IsVerbSection).Take(2).Count() == 1;
 
 		public void Validate()
 		{
 			_sections.Sort(CompareSections);
 		}
 
-		public override string ToString()
+		public string[] NameSections()
 		{
-			var nonEmpty = new List<EventNameSection>(_sections);
-			nonEmpty.RemoveAll(elt => elt == null);
-			return string.Join(_separator, nonEmpty);
+			return _sections.Where(section => section != null).Select(section => section.Value).ToArray();
 		}
 
-		public static implicit operator string(EventNameFormatter nameFormatter)
+		private int CompareSections(EventNameSection lhs, EventNameSection rhs)
 		{
-			return nameFormatter.ToString();
-		}
-
-		private bool CompareSections(EventNameSection lhs, EventNameSection rhs)
-		{
-			if (lhs == null) return true;
-			if (rhs == null) return false;
-			return (int)lhs.type > (int)rhs.type;
+			if (lhs == null) return -1;
+			if (rhs == null) return 1;
+			return (int)lhs.Type - (int)rhs.Type;
 		}
 
 		private bool ValidSection(EventNameSection eventNameSection)
 		{
 			// since we ignore null sections
 			if (eventNameSection == null) return true;
-			return eventNameSection.isValid;
+			return eventNameSection.IsValid;
 		}
 
 		private bool IsVerbSection(EventNameSection eventNameSection)
 		{
 			if (eventNameSection == null) return false;
-			return eventNameSection.type == EventNameSection.Type.Verb;
+			return eventNameSection.Type == EventNameSection.SectionType.Verb;
 		}
 
 		private bool IsClassificationSection(EventNameSection eventNameSection)
 		{
 			if (eventNameSection == null) return false;
-			return eventNameSection.type == EventNameSection.Type.Classification;
+			return eventNameSection.Type == EventNameSection.SectionType.Classification;
 		}
 	}
 }

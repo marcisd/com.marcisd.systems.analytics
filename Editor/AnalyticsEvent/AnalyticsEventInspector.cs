@@ -1,19 +1,19 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
 /*===============================================================
 Project:	Analytics
 Developer:	Marci San Diego
-Company:	DefaultCompany - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		29/01/2019 20:38
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem.Editor 
+namespace MSD.Systems.Analytics.Editor 
 {
 	[CustomEditor(typeof(AnalyticsEvent))]
 	public class AnalyticsEventInspector : UnityEditor.Editor 
 	{
-		AnalyticsEvent analyticsEvent => target as AnalyticsEvent;
+		private AnalyticsEvent AnalyticsEvent => target as AnalyticsEvent;
 
 		public override void OnInspectorGUI()
 		{
@@ -29,7 +29,7 @@ namespace DMED.Systems.AnalyticsSystem.Editor
 		private void DrawApplyButton() 
 		{
 			if (GUILayout.Button("Apply Format")) {
-				analyticsEvent.Apply();
+				AnalyticsEvent.Apply();
 				EditorUtility.SetDirty(target);
 				Repaint();
 			}
@@ -37,7 +37,7 @@ namespace DMED.Systems.AnalyticsSystem.Editor
 
 		private void DrawHealthCheck() 
 		{
-			if (!analyticsEvent.isFormatUpToDate) {
+			if (!AnalyticsEvent.IsFormatUpToDate) {
 				EditorGUILayout.HelpBox("Format is out of date. Re-apply the format and input the parameter values again.", MessageType.Warning);
 			}
 		}
@@ -52,11 +52,11 @@ namespace DMED.Systems.AnalyticsSystem.Editor
 		{
 			bool isDisabled = true;
 			if(EditorApplication.isPlaying) {
-				isDisabled = !analyticsEvent.isServiceInitialized;
+				isDisabled = !AnalyticsEvent.IsServiceInitialized;
 			}
 
 			using(new EditorGUI.DisabledGroupScope(isDisabled)) {
-				if(GUILayout.Button("Log Analytics Event")) { analyticsEvent.LogAnalyticsEvent(); }
+				if(GUILayout.Button("Log Analytics Event")) { AnalyticsEvent.LogAnalyticsEvent(); }
 			}
 		}
 	}

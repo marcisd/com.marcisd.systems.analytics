@@ -1,19 +1,19 @@
-using UnityEditor;
+﻿using UnityEditor;
 
 /*===============================================================
-Project:	Poop Deck
+Project:	Analytics
 Developer:	Marci San Diego
-Company:	David Morgan Education - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		18/06/2020 14:39
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem.Editor
+namespace MSD.Systems.Analytics.Editor
 {
 	[CustomEditor(typeof(ParameterPreset))]
 	[CanEditMultipleObjects]
 	public class ParameterPresetInspector : UnityEditor.Editor 
 	{
-		private new ParameterPreset target => base.target as ParameterPreset;
+		private ParameterPreset ParameterPreset => target as ParameterPreset;
 
 		public override void OnInspectorGUI() 
 		{
@@ -34,7 +34,7 @@ namespace DMED.Systems.AnalyticsSystem.Editor
 
 		public void DrawValidation()
 		{
-			if (!target.isValid) {
+			if (!Target.IsValid) {
 				EditorGUILayout.HelpBox("Naming violation!", MessageType.Error);
 			}
 		}

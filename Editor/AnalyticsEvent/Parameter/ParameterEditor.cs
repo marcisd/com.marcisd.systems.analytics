@@ -1,15 +1,15 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
-using DMED.Editor;
+using MSD.Editor;
 
 /*===============================================================
 Project:	Analytics
 Developer:	Marci San Diego
-Company:	DefaultCompany - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		30/01/2019 14:44
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem.Editor 
+namespace MSD.Systems.Analytics.Editor 
 {
 	public class ParameterEditor 
 	{

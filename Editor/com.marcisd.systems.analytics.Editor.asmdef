@@ -1,0 +1,19 @@
+{
+    "name": "com.marcisd.systems.analytics.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3ec39c0cacd0d4cbe95032b899ddbe93",
+        "GUID:4966e09d118dc49e8824145941b65c41"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

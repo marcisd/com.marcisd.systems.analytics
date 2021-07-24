@@ -1,24 +1,21 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using DMED.Editor;
-using System.Reflection;
 
 /*===============================================================
-Project:	Poop Deck
+Project:	Analytics
 Developer:	Marci San Diego
-Company:	David Morgan Education - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		17/06/2020 15:01
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem.Editor 
+namespace MSD.Systems.Analytics.Editor 
 {
 	[CustomPropertyDrawer(typeof(EventNameFormatter))]
 	public class EventNameFormatterDrawer : PropertyDrawer
 	{
-		SerializedProperty _separatorProp = null;
-		SerializedProperty _sectionsProp = null;
-		ReorderableList _reorderableList = null;
+		private SerializedProperty _sectionsProp;
+		private ReorderableList _reorderableList;
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
@@ -28,27 +25,9 @@ namespace DMED.Systems.AnalyticsSystem.Editor
 				height = _reorderableList.GetHeight(),
 			};
 
-			Rect separatorPos = new Rect(position) {
-				y = rListPos.y + rListPos.height + EditorGUIUtility.standardVerticalSpacing,
-				height = EditorGUIUtility.singleLineHeight
-			};
-
-			Rect fullNamePos = new Rect(position) {
-				y = separatorPos.y + separatorPos.height + EditorGUIUtility.standardVerticalSpacing,
-				height = EditorGUIUtility.singleLineHeight,
-			};
-
 			_reorderableList.DoList(rListPos);
 
 			DragAndDropObjects(rListPos);
-
-			_separatorProp = property.FindPropertyRelative("_separator");
-			EditorGUI.PropertyField(separatorPos, _separatorProp, new GUIContent("Separator"));
-
-			object instance = property.GetObjectInstance();
-			MethodInfo toStringMethodInfo = fieldInfo.FieldType.GetMethod("ToString");
-
-			EditorGUI.LabelField(fullNamePos, "Full Name", (string)toStringMethodInfo.Invoke(instance, null));
 		}
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -57,7 +36,6 @@ namespace DMED.Systems.AnalyticsSystem.Editor
 
 			return _reorderableList.GetHeight() + EditorGUIUtility.standardVerticalSpacing +
 				((EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * 2f);
-
 		}
 
 		private void DragAndDropObjects(Rect rect)

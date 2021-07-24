@@ -1,19 +1,19 @@
-using UnityEditor;
+﻿using UnityEditor;
 
 /*===============================================================
-Project:	Poop Deck
+Project:	Analytics
 Developer:	Marci San Diego
-Company:	David Morgan Education - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		18/06/2020 14:39
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem.Editor
+namespace MSD.Systems.Analytics.Editor
 {
 	[CustomEditor(typeof(EventNameSection))]
 	[CanEditMultipleObjects]
 	public class EventNameSectionInspector : UnityEditor.Editor 
 	{
-		private new EventNameSection target => base.target as EventNameSection;
+		private EventNameSection EventNameSection => target as EventNameSection;
 
 		public override void OnInspectorGUI() 
 		{
@@ -34,7 +34,7 @@ namespace DMED.Systems.AnalyticsSystem.Editor
 
 		public void DrawValidation()
 		{
-			if (!target.isValid) {
+			if (!EventNameSection.IsValid) {
 				EditorGUILayout.HelpBox("Naming violation!", MessageType.Error);
 			}
 		}

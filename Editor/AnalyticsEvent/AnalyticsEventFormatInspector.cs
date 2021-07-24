@@ -1,13 +1,13 @@
-using UnityEditor;
+﻿using UnityEditor;
 
 /*===============================================================
 Project:	Analytics
 Developer:	Marci San Diego
-Company:	DefaultCompany - marcianosd@dm-ed.com
+Company:	Personal - marcisandiego@gmail.com
 Date:		29/01/2019 22:15
 ===============================================================*/
 
-namespace DMED.Systems.AnalyticsSystem.Editor 
+namespace MSD.Systems.Analytics.Editor 
 {
 	[CustomEditor(typeof(AnalyticsEventFormat))]
 	public class AnalyticsEventFormatInspector : UnityEditor.Editor 

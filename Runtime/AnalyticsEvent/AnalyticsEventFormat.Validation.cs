@@ -9,7 +9,7 @@ Date:		24/04/2019 11:23
 
 namespace MSD.Systems.Analytics
 {
-	public partial class AnalyticsEventFormat
+	internal partial class AnalyticsEventFormat
 	{
 		[Serializable]
 		private abstract class Validation

@@ -10,11 +10,14 @@ Date:		30/01/2019 12:23
 
 namespace MSD.Systems.Analytics 
 {
+	/// <summary>
+	/// Stores serialized values for the parameters.
+	/// </summary>
 	[Serializable]
 	public class ParameterValue
 	{
 		[SerializeField]
-		private ParameterType _type;
+		private ParameterValueType _type;
 
 		[SerializeField]
 		private BoolReference _boolReference;
@@ -28,13 +31,13 @@ namespace MSD.Systems.Analytics
 		[SerializeField]
 		private StringReference _stringReference;
 
-		public ParameterValue(ParameterType type)
+		public ParameterValue(ParameterValueType type)
 		{
 			_type = type;
 			ResetReferences();
 		}
 
-		public ParameterType Type {
+		public ParameterValueType Type {
 			get => _type;
 			set {
 				if (_type != value) {
@@ -45,10 +48,10 @@ namespace MSD.Systems.Analytics
 		}
 
 		public object ObjectValue => _type switch {
-			ParameterType.Bool => _boolReference.Value,
-			ParameterType.Float => _floatReference.Value,
-			ParameterType.Int => _intReference.Value,
-			ParameterType.String => _stringReference.Value,
+			ParameterValueType.Bool => _boolReference.Value,
+			ParameterValueType.Float => _floatReference.Value,
+			ParameterValueType.Int => _intReference.Value,
+			ParameterValueType.String => _stringReference.Value,
 			_ => null,
 		};
 
@@ -69,10 +72,10 @@ namespace MSD.Systems.Analytics
 		}
 
 		public override string ToString() => _type switch {
-			ParameterType.Bool => _boolReference.Value.ToString(),
-			ParameterType.Float => _floatReference.Value.ToString(),
-			ParameterType.Int => _intReference.Value.ToString(),
-			ParameterType.String => _stringReference.Value,
+			ParameterValueType.Bool => _boolReference.Value.ToString(),
+			ParameterValueType.Float => _floatReference.Value.ToString(),
+			ParameterValueType.Int => _intReference.Value.ToString(),
+			ParameterValueType.String => _stringReference.Value,
 			_ => string.Empty,
 		};
 	}

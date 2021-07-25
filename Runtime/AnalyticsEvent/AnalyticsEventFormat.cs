@@ -12,8 +12,11 @@ Date:		29/01/2019 21:51
 
 namespace MSD.Systems.Analytics
 {
+	/// <summary>
+	/// Provides the specification for an <see cref="AnalyticsEvent"/>.
+	/// </summary>
 	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Analytics Event Format", order = 2)]
-	public partial class AnalyticsEventFormat : ScriptableObject
+	internal partial class AnalyticsEventFormat : ScriptableObject
 	{
 		[SerializeField]
 		private AnalyticsService _serviceDestination;
@@ -30,11 +33,20 @@ namespace MSD.Systems.Analytics
 		[SerializeField]
 		private List<string> _validationLogs = new List<string>();
 
+		/// <summary>
+		/// Specifies where the <see cref="AnalyticsEvent"/> will be logged.
+		/// </summary>
 		public AnalyticsService ServiceDestination => _serviceDestination;
 
-		public string EventName => _serviceDestination.EventNameFormatSpecifier.FormatEventName(_eventContext.NameSections());
+		/// <summary>
+		/// Specifies the name of the <see cref="AnalyticsEvent"/>.
+		/// </summary>
+		public string EventName => _serviceDestination.EventNameFormatSpecifier.FormatEventName(_eventContext);
 
-		public IDictionary<string, ParameterType> ParameterFormat => _parameterFormatter.GetParameterFormat();
+		/// <summary>
+		/// Specifies the parameters to be sent with the <see cref="AnalyticsEvent"/>.
+		/// </summary>
+		public IDictionary<string, ParameterValueType> ParameterFormat => _parameterFormatter.GetParameterFormat();
 
 		public int ParameterCount => _parameterFormatter.Count;
 

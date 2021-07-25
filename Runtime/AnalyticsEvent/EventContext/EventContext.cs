@@ -12,8 +12,11 @@ Date:		17/06/2020 08:22
 
 namespace MSD.Systems.Analytics
 {
+	/// <summary>
+	/// Specifies the context of an <see cref="AnalyticsEvent"/>.
+	/// </summary>
 	[Serializable]
-	public class EventContext
+	internal class EventContext
 	{
 		[SerializeField]
 		private List<EventContextComponent> _sections = new List<EventContextComponent>();

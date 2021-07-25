@@ -9,7 +9,10 @@ Date:		24/07/2021 12:20
 
 namespace MSD.Systems.Analytics
 {
-    public class EventNameFormatSpecifier
+    /// <summary>
+	/// Converts the <see cref="EventContext"/> into a name for the event.
+	/// </summary>
+    internal class EventNameFormatSpecifier
     {
         private readonly string _separator;
 
@@ -25,9 +28,9 @@ namespace MSD.Systems.Analytics
             _maxCharacterCount = Mathf.Clamp(maxCharacterCount, 1, 100);
         }
 
-        public string FormatEventName(string[] eventNameSections)
+        public string FormatEventName(EventContext context)
         {
-            string full = string.Join(_separator, eventNameSections);
+            string full = string.Join(_separator, context.NameSections());
             return full.Length < _maxCharacterCount ? full : full.Substring(0, _maxCharacterCount);
         }
     }

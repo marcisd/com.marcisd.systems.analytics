@@ -10,7 +10,7 @@ Date:		25/07/2021 08:58
 namespace MSD.Systems.Analytics
 {
     [CreateAssetMenu(menuName = "MSD/Systems/Analytics/Verb Event Context Component", order = 53)]
-    public class VerbEventContextComponent : EventContextComponent
+    internal class VerbEventContextComponent : EventContextComponent
     {
         private void Awake()
         {

@@ -8,7 +8,7 @@ Date:		17/06/2020 08:13
 
 namespace MSD.Systems.Analytics
 {
-	public enum EventContextComponentType
+	internal enum EventContextComponentType
 	{
 		/// <summary>
 		/// The different concepts in your game you want to track.

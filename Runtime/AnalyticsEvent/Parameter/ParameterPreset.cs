@@ -10,8 +10,11 @@ Date:		17/06/2020 11:41
 
 namespace MSD.Systems.Analytics
 {
+	/// <summary>
+	/// Provides a specification for event parameters.
+	/// </summary>
 	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Parameter Preset", order = 5)]
-	public class ParameterPreset : ScriptableObject
+	internal class ParameterPreset : ScriptableObject
 	{
 		protected static readonly Regex LOWER_SNAKE_CASE_REGEX = new Regex(@"^[a-z][a-z0-9_]+$");
 
@@ -19,11 +22,11 @@ namespace MSD.Systems.Analytics
 		private string _name = string.Empty;
 
 		[SerializeField]
-		private ParameterType _type = ParameterType.String;
+		private ParameterValueType _type = ParameterValueType.String;
 
 		public string Name => _name;
 
-		public ParameterType Type => _type;
+		public ParameterValueType Type => _type;
 
 		public bool IsValid => LOWER_SNAKE_CASE_REGEX.IsMatch(_name);
 

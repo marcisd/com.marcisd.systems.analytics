@@ -10,7 +10,10 @@ Date:		17/06/2020 08:13
 
 namespace MSD.Systems.Analytics
 {
-	public abstract class EventContextComponent : ScriptableObject
+	/// <summary>
+	/// Building blocks of an <see cref="EventContext"/> grammar.
+	/// </summary>
+	internal abstract class EventContextComponent : ScriptableObject
 	{
 		protected static readonly Regex UPPER_CAMEL_CASE_REGEX = new Regex(@"^[A-Z][A-Za-z0-9]+$");
 

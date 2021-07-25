@@ -12,6 +12,9 @@ namespace MSD.Systems.Analytics
 {
 	using UnityAnalytics = UnityEngine.Analytics.Analytics;
 
+	/// <summary>
+	/// Unity Analytics implementation
+	/// </summary>
 	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Unity Analytics Service", order = 101)]
 	public class UnityAnalyticsService : AnalyticsService
 	{
@@ -19,10 +22,10 @@ namespace MSD.Systems.Analytics
 
 		private readonly Dictionary<string, object> _parameters = new Dictionary<string, object>();
 
-		public override EventNameFormatSpecifier EventNameFormatSpecifier => new EventNameFormatSpecifier(".", 100);
+		internal override EventNameFormatSpecifier EventNameFormatSpecifier => new EventNameFormatSpecifier(".", 100);
 
 #if UNITY_EDITOR
-		public override string EventNameFormatBlob => "Custom event names should have at most 100 characters.";
+		internal override string EventNameFormatBlob => "Custom event names should have at most 100 characters.";
 #endif
 
 		protected override string DebugPrefix => DEBUG_PREFIX;

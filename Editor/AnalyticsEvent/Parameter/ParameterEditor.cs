@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using System;
 
 /*===============================================================
 Project:	Analytics
@@ -48,21 +49,21 @@ namespace MSD.Systems.Analytics.Editor
 
 				GUIContent valueLabel = new GUIContent("Value");
 
-				switch ((ParameterType)_typeProp.intValue) {
-					case ParameterType.Bool:
+				switch ((ParameterValueType)_typeProp.enumValueIndex) {
+					case ParameterValueType.Bool:
 						EditorGUI.PropertyField(valueRect, _valueProp.FindPropertyRelative("_boolReference"), valueLabel);
 						break;
-					case ParameterType.Float:
+					case ParameterValueType.Float:
 						EditorGUI.PropertyField(valueRect, _valueProp.FindPropertyRelative("_floatReference"), valueLabel);
 						break;
-					case ParameterType.Int:
+					case ParameterValueType.Int:
 						EditorGUI.PropertyField(valueRect, _valueProp.FindPropertyRelative("_intReference"), valueLabel);
 						break;
-					case ParameterType.String:
+					case ParameterValueType.String:
 						EditorGUI.PropertyField(valueRect, _valueProp.FindPropertyRelative("_stringReference"), valueLabel);
 						break;
 					default:
-						break;
+						throw new NotSupportedException();
 				}
 			}
 		}

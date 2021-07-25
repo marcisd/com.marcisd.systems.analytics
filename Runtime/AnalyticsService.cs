@@ -10,12 +10,16 @@ Date:		30/01/2019 19:47
 
 namespace MSD.Systems.Analytics
 {
+	/// <summary>
+	/// The abstraction of an Analytics Service implementation.
+	/// This allows the system to log analytics events into diffetent services.
+	/// </summary>
 	public abstract class AnalyticsService : ScriptableObject
 	{
 		[field: NonSerialized]
-		public bool IsInitialized { get; private set; }
+		internal bool IsInitialized { get; private set; }
 
-		public bool CanLogEvents {
+		internal bool CanLogEvents {
 			get {
 #if UNITY_EDITOR
 				return IsInitialized && AnalyticsConfig.IsEditorEventsAllowed;
@@ -25,10 +29,10 @@ namespace MSD.Systems.Analytics
 			}
 		}
 
-		public abstract EventNameFormatSpecifier EventNameFormatSpecifier { get; }
+		internal abstract EventNameFormatSpecifier EventNameFormatSpecifier { get; }
 
 #if UNITY_EDITOR
-		public abstract string EventNameFormatBlob { get; }
+		internal abstract string EventNameFormatBlob { get; }
 #endif
 
 		protected abstract string DebugPrefix { get; }
@@ -43,7 +47,7 @@ namespace MSD.Systems.Analytics
 			}
 		}
 
-		public void LogEvent(AnalyticsEvent analyticsEvent)
+		internal void LogEvent(AnalyticsEvent analyticsEvent)
 		{
 			if (CheckLoggingAvailability()) {
 				if (analyticsEvent.Parameters.Count == 0) {
@@ -54,14 +58,14 @@ namespace MSD.Systems.Analytics
 			}
 		}
 
-		public void LogEvent(string eventName)
+		internal void LogEvent(string eventName)
 		{
 			if (CheckLoggingAvailability()) {
 				DoLogEvent(eventName);
 			}
 		}
 
-		public void LogEvent(string eventName, Parameters parameters)
+		internal void LogEvent(string eventName, Parameters parameters)
 		{
 			if (CheckLoggingAvailability()) {
 				DoLogEvent(eventName, parameters);

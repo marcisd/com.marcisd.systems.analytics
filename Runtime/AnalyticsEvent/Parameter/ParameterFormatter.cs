@@ -13,8 +13,11 @@ Date:		17/06/2020 16:24
 
 namespace MSD.Systems.Analytics
 {
+	/// <summary>
+	/// Specifies <see cref="ParameterPreset"/>s for an <see cref="AnalyticsEventFormat"/>
+	/// </summary>
 	[Serializable]
-	public class ParameterFormatter : IEnumerable<ParameterPreset>
+	internal class ParameterFormatter : IEnumerable<ParameterPreset>
 	{
 		internal static readonly int maxParameterCount = 10;
 
@@ -35,7 +38,7 @@ namespace MSD.Systems.Analytics
 			}
 		}
 
-		public IDictionary<string, ParameterType> GetParameterFormat()
+		public IDictionary<string, ParameterValueType> GetParameterFormat()
 		{
 			List<ParameterPreset> nonEmpty = new List<ParameterPreset>(_presets);
 			nonEmpty.RemoveAll(elt => elt == null);

@@ -33,6 +33,9 @@ namespace MSD.Systems.Analytics
 
 		public Parameters Parameters => _parameters;
 
+		/// <summary>
+		/// Logs the defined analytics event to its destination.
+		/// </summary>
 		public void LogAnalyticsEvent()
 		{
 			Debugger.Log(DEBUG_PREFIX,
@@ -62,7 +65,7 @@ namespace MSD.Systems.Analytics
 
 		private string FormatString => Format != null ? Format.ToString() : string.Empty;
 
-		public AnalyticsEventFormat Format {
+		internal AnalyticsEventFormat Format {
 			get { return _format; }
 			set {
 				if (SetPropertyUtility.SetClass(ref _format, value)) {
@@ -71,7 +74,7 @@ namespace MSD.Systems.Analytics
 			}
 		}
 
-		public void Apply()
+		internal void Apply()
 		{
 			if (_format == null) {
 				UnityEditor.EditorUtility.DisplayDialog("Analytics Event", "Assign an Analytics Event Format first.", "Ok");
@@ -98,6 +101,8 @@ namespace MSD.Systems.Analytics
 				_eventFormatCache = Format.ToString();
 			}
 		}
+
 #endif
+
 	}
 }

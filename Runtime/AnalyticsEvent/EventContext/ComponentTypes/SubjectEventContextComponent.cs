@@ -10,7 +10,7 @@ Date:		25/07/2021 08:58
 namespace MSD.Systems.Analytics
 {
     [CreateAssetMenu(menuName = "MSD/Systems/Analytics/Subject Event Context Component", order = 52)]
-    public class SubjectEventContextComponent : EventContextComponent
+    internal class SubjectEventContextComponent : EventContextComponent
     {
         private void Awake()
         {

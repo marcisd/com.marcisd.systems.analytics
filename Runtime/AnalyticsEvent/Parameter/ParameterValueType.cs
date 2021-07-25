@@ -8,7 +8,7 @@ Date:		29/01/2019 21:15
 
 namespace MSD.Systems.Analytics 
 {
-	public enum ParameterType 
+	public enum ParameterValueType 
 	{
 		Bool,
 		Float,

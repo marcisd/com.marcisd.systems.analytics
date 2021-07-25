@@ -16,12 +16,12 @@ namespace MSD.Systems.Analytics
 		Classification,
 
 		/// <summary>
-		/// The entity which is carrying out the action.
+		/// The entity at which the action of the verb is directed.
 		/// </summary>
 		Subject,
 
 		/// <summary>
-		/// The action being done by the subject.
+		/// The action carried out to the subject.
 		/// </summary>
 		Verb,
 	}

@@ -12,7 +12,7 @@ namespace MSD.Systems.Analytics
 {
 	using UnityAnalytics = UnityEngine.Analytics.Analytics;
 
-	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Unity Analytics Service", order = 51)]
+	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Unity Analytics Service", order = 101)]
 	public class UnityAnalyticsService : AnalyticsService
 	{
 		private static readonly string DEBUG_PREFIX = $"[{nameof(UnityAnalyticsService)}]";

@@ -10,25 +10,25 @@ Date:		17/06/2020 08:13
 
 namespace MSD.Systems.Analytics
 {
-	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Event Context Component", order = 3)]
-	public class EventContextComponent : ScriptableObject
+	public abstract class EventContextComponent : ScriptableObject
 	{
 		protected static readonly Regex UPPER_CAMEL_CASE_REGEX = new Regex(@"^[A-Z][A-Za-z0-9]+$");
 
 		[SerializeField]
-		private string _value = string.Empty;
+		private string _name = string.Empty;
 
 		[SerializeField]
-		private EventContextComponentType _type = EventContextComponentType.Subject;
+		[ReadOnly]
+		protected EventContextComponentType _type = EventContextComponentType.Subject;
 
-		public string Value => _value;
+		public string Name => _name;
 
 		public EventContextComponentType Type => _type;
 
-		public bool IsValid => UPPER_CAMEL_CASE_REGEX.IsMatch(_value);
+		public bool IsValid => UPPER_CAMEL_CASE_REGEX.IsMatch(_name);
 
-		public override string ToString() => _value;
+		public override string ToString() => _name;
 
-		public static implicit operator string(EventContextComponent nameSection) => nameSection._value;
+		public static implicit operator string(EventContextComponent nameSection) => nameSection._name;
 	}
 }

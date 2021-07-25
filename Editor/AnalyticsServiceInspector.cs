@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,18 +14,6 @@ namespace MSD.Systems.Analytics.Editor
 	[CustomEditor(typeof(AnalyticsService), true)]
 	public class AnalyticsServiceInspector : UnityEditor.Editor
 	{
-		private static GUIStyle s_style;
-		private static GUIStyle Style {
-			get {
-				if (s_style == null) {
-					s_style = new GUIStyle(EditorStyles.helpBox) {
-						richText = true,
-					};
-				}
-				return s_style;
-			}
-		}
-
 		private AnalyticsService Target => target as AnalyticsService;
 
 		public override void OnInspectorGUI()
@@ -33,14 +22,14 @@ namespace MSD.Systems.Analytics.Editor
 
 			EditorGUILayout.Space();
 
-			string spec = "<b>Event Name Format Specifier</b>\n";
-			spec += "\n";
-			spec += $"{Target.EventNameFormatBlob}\n";
-			spec += "\n";
-			spec += $"<b>Separator:</b>\t\t\"{Target.EventNameFormatSpecifier.Separator}\"\n";
+			string spec = "<b>Event Name Format Specifier</b>" + Environment.NewLine;
+			spec += Environment.NewLine;
+			spec += $"{Target.EventNameFormatBlob}" + Environment.NewLine;
+			spec += Environment.NewLine;
+			spec += $"<b>Separator:</b>\t\t\"{Target.EventNameFormatSpecifier.Separator}\"" + Environment.NewLine;
 			spec += $"<b>Max Character Count:</b>\t{Target.EventNameFormatSpecifier.MaxCharacterCount}";
 
-			EditorGUILayout.LabelField(spec, Style);
+			EditorGUILayout.LabelField(spec, Styles.RichHelpBox);
 		}
 	}
 }

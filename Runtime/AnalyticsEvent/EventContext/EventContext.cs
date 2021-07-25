@@ -35,7 +35,7 @@ namespace MSD.Systems.Analytics
 
 		public string[] NameSections()
 		{
-			return _sections.Where(section => section != null).Select(section => section.Value).ToArray();
+			return _sections.Where(section => section != null).Select(section => section.Name).ToArray();
 		}
 
 		private int CompareSections(EventContextComponent lhs, EventContextComponent rhs)

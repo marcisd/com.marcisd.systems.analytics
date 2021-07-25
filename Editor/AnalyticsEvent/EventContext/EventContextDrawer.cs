@@ -101,6 +101,14 @@ namespace MSD.Systems.Analytics.Editor
 			if (elementProp != null && elementProp.objectReferenceValue != null) {
 				SerializedObject elementObj = new SerializedObject(elementProp.objectReferenceValue);
 				SerializedProperty typeProp = elementObj.FindProperty("_type");
+				EventContextComponentType type = (EventContextComponentType)typeProp.enumValueIndex;
+				Color color = type switch {
+					EventContextComponentType.Classification => Color.magenta,
+					EventContextComponentType.Subject => Color.cyan,
+					EventContextComponentType.Verb => Color.green,
+					_ => GUI.color,
+				};
+				using (new GUIColorScope(color))
 				using (new EditorGUILabelWidthScope(35f))
 				using (new EditorGUI.DisabledScope(true)) {
 					EditorGUI.PropertyField(typeRect, typeProp);

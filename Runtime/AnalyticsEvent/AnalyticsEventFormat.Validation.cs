@@ -26,16 +26,13 @@ namespace MSD.Systems.Analytics
 
 			public abstract bool Test(AnalyticsEventFormat format);
 
-			public static Validation Factory(ErrorType type)
-			{
-				return type switch {
-					ErrorType.NoServiceDestination => new NoServiceDestination(),
-					ErrorType.InvalidEventName => new InvalidEventName(),
-					ErrorType.InvalidEventContext => new InvalidEventContext(),
-					ErrorType.InvalidParameterNameFormat => new InvalidParameterNameFormat(),
-					_ => null,
-				};
-			}
+			public static Validation Factory(ErrorType type) => type switch {
+				ErrorType.NoServiceDestination => new NoServiceDestination(),
+				ErrorType.InvalidEventName => new InvalidEventName(),
+				ErrorType.InvalidEventContext => new InvalidEventContext(),
+				ErrorType.InvalidParameterNameFormat => new InvalidParameterNameFormat(),
+				_ => null,
+			};
 
 			public static void ForEachType(Action<ErrorType> actionPerType)
 			{

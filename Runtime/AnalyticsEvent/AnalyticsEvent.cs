@@ -10,6 +10,9 @@ Date:		29/01/2019 20:36
 
 namespace MSD.Systems.Analytics
 {
+	/// <summary>
+	/// Provides the means of executing an analytics event.
+	/// </summary>
 	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Analytics Event", order = 1)]
 	public class AnalyticsEvent : ScriptableObject
 	{

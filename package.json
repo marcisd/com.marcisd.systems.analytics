@@ -8,5 +8,8 @@
     "name": "Marci San Diego",
     "email": "marcisandiego@gmail.com",
     "url": "https://marcisd.com/"
+  },
+  "dependencies": {
+    "com.marcisd.core": "0.0.1"
   }
 }

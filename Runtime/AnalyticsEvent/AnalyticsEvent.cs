@@ -16,7 +16,7 @@ namespace MSD.Systems.Analytics
 	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Analytics Event", order = 1)]
 	public class AnalyticsEvent : ScriptableObject
 	{
-		private static readonly string DEBUG_PREFIX = $"[{nameof(AnalyticsEvent)}]";
+		private static readonly string DEBUG_PREPEND = $"[{nameof(AnalyticsEvent)}]";
 
 		[HelpBox("Read-only values are derived from the AnalyticsEventFormat.")]
 		[ReadOnly]
@@ -41,7 +41,7 @@ namespace MSD.Systems.Analytics
 		/// </summary>
 		public void LogAnalyticsEvent()
 		{
-			Debugger.Log(DEBUG_PREFIX,
+			Debugger.Log(DEBUG_PREPEND,
 				$"Sending analytics event." + Environment.NewLine +
 				$"Name [{_eventName}]" + Environment.NewLine +
 				Parameters.ToString()

@@ -18,7 +18,7 @@ namespace MSD.Systems.Analytics
 	[CreateAssetMenu(menuName = "MSD/Systems/Analytics/Unity Analytics Service", order = 101)]
 	public class UnityAnalyticsService : AnalyticsService
 	{
-		private static readonly string DEBUG_PREFIX = $"[{nameof(UnityAnalyticsService)}]";
+		private static readonly string DEBUG_PREPEND = $"[{nameof(UnityAnalyticsService)}]";
 
 		private readonly Dictionary<string, object> _parameters = new Dictionary<string, object>();
 
@@ -28,7 +28,7 @@ namespace MSD.Systems.Analytics
 		internal override string EventNameFormatBlob => "Custom event names should have at most 100 characters.";
 #endif
 
-		protected override string DebugPrefix => DEBUG_PREFIX;
+		protected override string DebugPrefix => DEBUG_PREPEND;
 
 		internal override void Bootstrap()
 		{

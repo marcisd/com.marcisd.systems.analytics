@@ -16,7 +16,7 @@ namespace MSD.Systems.Analytics
 {
 	public class AnalyticsConfig : ScriptableConfig<AnalyticsConfig>
 	{
-		private static readonly string DEBUG_PREFIX = $"[{nameof(AnalyticsConfig)}]";
+		private static readonly string DEBUG_PREPEND = $"[{nameof(AnalyticsConfig)}]";
 
 		[Header("Runtime")]
 		[SerializeField]
@@ -45,7 +45,7 @@ namespace MSD.Systems.Analytics
 		/// </summary>
 		public static void Initialize()
 		{
-			Debugger.Log(DEBUG_PREFIX, "Initializing Analytics Services...");
+			Debugger.Log(DEBUG_PREPEND, "Initializing Analytics Services...");
 			foreach (AnalyticsService service in Instance._services) {
 				service.Initialize();
 			}

@@ -20,10 +20,10 @@ namespace MSD.Systems.Analytics.Editor
 
 		private void DrawValidationLogs()
 		{
-			var logsProp = serializedObject.FindProperty("_validationLogs");
+			SerializedProperty logsProp = serializedObject.FindProperty("_validationLogs");
 			if (logsProp != null && logsProp.isArray) {
 				for (int i = 0; i < logsProp.arraySize; i++) {
-					var elt = logsProp.GetArrayElementAtIndex(i);
+					SerializedProperty elt = logsProp.GetArrayElementAtIndex(i);
 					EditorGUILayout.HelpBox(elt.stringValue, MessageType.Error);
 				}
 			}

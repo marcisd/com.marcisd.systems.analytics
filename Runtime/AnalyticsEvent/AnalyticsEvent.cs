@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /*===============================================================
@@ -97,7 +98,7 @@ namespace MSD.Systems.Analytics
 				_eventName = _format.EventName;
 
 				_parameters.Clear();
-				foreach (var paramFormat in _format.ParameterFormat) {
+				foreach (KeyValuePair<string, ParameterValueType> paramFormat in _format.ParameterFormat) {
 					_parameters.Add(paramFormat.Key, new ParameterValue(paramFormat.Value));
 				}
 

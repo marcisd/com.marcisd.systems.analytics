@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 /*===============================================================
@@ -16,7 +17,7 @@ namespace MSD.Systems.Analytics
 		public override string ToString()
 		{
 			StringBuilder sb = new StringBuilder("Params [");
-			foreach (var pair in this) {
+			foreach (KeyValuePair<string, ParameterValue> pair in this) {
 				sb.Append(pair.Key);
 				sb.Append(": ");
 				sb.Append(string.Format("({0})", pair.Value.Type));

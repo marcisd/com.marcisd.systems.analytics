@@ -44,7 +44,7 @@ namespace MSD.Systems.Analytics.Editor
 					DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
 					Event.current.Use();
 				} else if (Event.current.type == EventType.DragPerform) {
-					foreach (var objectReference in DragAndDrop.objectReferences) {
+					foreach (Object objectReference in DragAndDrop.objectReferences) {
 						if (objectReference is EventContextComponent eventContextComponent) {
 							Add(eventContextComponent);
 						}
@@ -91,7 +91,7 @@ namespace MSD.Systems.Analytics.Editor
 			};
 
 			SerializedProperty elementProp = _sectionsProp.GetArrayElementAtIndex(index);
-			using (var changeCheck = new EditorGUI.ChangeCheckScope()) {
+			using (EditorGUI.ChangeCheckScope changeCheck = new EditorGUI.ChangeCheckScope()) {
 				EditorGUI.PropertyField(objRect, elementProp, GUIContent.none);
 				if (changeCheck.changed) {
 					elementProp.serializedObject.ApplyModifiedProperties();

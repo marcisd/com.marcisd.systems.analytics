@@ -61,7 +61,7 @@ namespace MSD.Systems.Analytics
 		private void ProcessParameters(Parameters parameters)
 		{
 			_parameters.Clear();
-			foreach (var parameter in parameters) {
+			foreach (KeyValuePair<string, ParameterValue> parameter in parameters) {
 				_parameters.Add(parameter.Key, parameter.Value.ObjectValue);
 			}
 		}

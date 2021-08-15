@@ -30,7 +30,7 @@ namespace MSD.Systems.Analytics
 
 		protected override string DebugPrefix => DEBUG_PREPEND;
 
-		internal override void Bootstrap()
+		internal override void OnAppStart()
 		{
 			// Unity Analytics auto-initializes by default
 			// but can be flagged to delay initialization

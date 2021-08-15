@@ -37,7 +37,7 @@ namespace MSD.Systems.Analytics
 
 		protected abstract string DebugPrefix { get; }
 
-		internal virtual void Bootstrap() { }
+		internal virtual void OnAppStart() { }
 
 		internal void Initialize()
 		{

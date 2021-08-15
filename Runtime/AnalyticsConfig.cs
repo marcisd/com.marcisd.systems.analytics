@@ -28,10 +28,10 @@ namespace MSD.Systems.Analytics
 		internal static bool ShouldInitializeOnAppStart => Instance._shouldInitializeOnAppStart;
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void Bootstrap()
+		private static void OnAppStart()
 		{
 			foreach (AnalyticsService service in Instance._services) {
-				service.Bootstrap();
+				service.OnAppStart();
 			}
 
 			if (Instance._shouldInitializeOnAppStart) {
